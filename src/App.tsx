@@ -16,12 +16,60 @@ function StandingsGenerator() {
   const handleExport = async () => {
     if (graphicElement) {
       try {
+        // Wait for fonts to be fully loaded
+        await document.fonts.ready
+
+        // Store original styles
+        const originalMaxWidth = graphicElement.style.maxWidth
+        const originalWidth = graphicElement.style.width
+
+        // Temporarily remove max-width constraint to capture at full resolution
+        graphicElement.style.maxWidth = 'none'
+        graphicElement.style.width = 'auto'
+
+        // Disable backdrop-blur and blur effects during export
+        const elementsWithBackdropBlur = graphicElement.querySelectorAll('[class*="backdrop-blur"]')
+        const elementsWithBlur = graphicElement.querySelectorAll('[class*="blur-"]')
+
+        const backdropBlurStyles: string[] = []
+        elementsWithBackdropBlur.forEach((el, i) => {
+          backdropBlurStyles[i] = (el as HTMLElement).style.backdropFilter
+          ;(el as HTMLElement).style.backdropFilter = 'none'
+        })
+
+        const blurFilters: string[] = []
+        elementsWithBlur.forEach((el, i) => {
+          blurFilters[i] = (el as HTMLElement).style.filter
+          ;(el as HTMLElement).style.filter = (el as HTMLElement).style.filter?.replace(/blur\([^)]+\)/g, '') || 'none'
+        })
+
+        // Calculate natural dimensions
+        const naturalWidth = graphicElement.scrollWidth
+        const naturalHeight = graphicElement.scrollHeight
+
+        // Export at high resolution
         const dataUrl = await toPng(graphicElement, {
           quality: 1,
-          pixelRatio: 4,
-          width: graphicElement.offsetWidth * 4,
-          height: graphicElement.offsetHeight * 4,
+          pixelRatio: window.devicePixelRatio * 2,
+          width: naturalWidth,
+          height: naturalHeight,
+          backgroundColor: null,
+          cacheBust: true,
         })
+
+        // Restore original styles
+        graphicElement.style.maxWidth = originalMaxWidth
+        graphicElement.style.width = originalWidth
+
+        // Restore backdrop-blur and blur effects
+        elementsWithBackdropBlur.forEach((el, i) => {
+          ;(el as HTMLElement).style.backdropFilter = backdropBlurStyles[i]
+        })
+
+        elementsWithBlur.forEach((el, i) => {
+          ;(el as HTMLElement).style.filter = blurFilters[i]
+        })
+
         const link = document.createElement('a')
         link.download = `espotz-${state.template}-${Date.now()}.png`
         link.href = dataUrl
@@ -35,18 +83,65 @@ function StandingsGenerator() {
   const handleShare = async () => {
     if (graphicElement) {
       try {
+        // Wait for fonts to be fully loaded
+        await document.fonts.ready
+
+        // Store original styles
+        const originalMaxWidth = graphicElement.style.maxWidth
+        const originalWidth = graphicElement.style.width
+
+        // Temporarily remove max-width constraint to capture at full resolution
+        graphicElement.style.maxWidth = 'none'
+        graphicElement.style.width = 'auto'
+
+        // Disable backdrop-blur and blur effects during export
+        const elementsWithBackdropBlur = graphicElement.querySelectorAll('[class*="backdrop-blur"]')
+        const elementsWithBlur = graphicElement.querySelectorAll('[class*="blur-"]')
+
+        const backdropBlurStyles: string[] = []
+        elementsWithBackdropBlur.forEach((el, i) => {
+          backdropBlurStyles[i] = (el as HTMLElement).style.backdropFilter
+          ;(el as HTMLElement).style.backdropFilter = 'none'
+        })
+
+        const blurFilters: string[] = []
+        elementsWithBlur.forEach((el, i) => {
+          blurFilters[i] = (el as HTMLElement).style.filter
+          ;(el as HTMLElement).style.filter = (el as HTMLElement).style.filter?.replace(/blur\([^)]+\)/g, '') || 'none'
+        })
+
+        // Calculate natural dimensions
+        const naturalWidth = graphicElement.scrollWidth
+        const naturalHeight = graphicElement.scrollHeight
+
+        // Export at high resolution
         const dataUrl = await toPng(graphicElement, {
           quality: 1,
-          pixelRatio: 4,
-          width: graphicElement.offsetWidth * 4,
-          height: graphicElement.offsetHeight * 4,
+          pixelRatio: window.devicePixelRatio * 2,
+          width: naturalWidth,
+          height: naturalHeight,
+          backgroundColor: null,
+          cacheBust: true,
         })
-        
+
+        // Restore original styles
+        graphicElement.style.maxWidth = originalMaxWidth
+        graphicElement.style.width = originalWidth
+
+        // Restore backdrop-blur and blur effects
+        elementsWithBackdropBlur.forEach((el, i) => {
+          ;(el as HTMLElement).style.backdropFilter = backdropBlurStyles[i]
+        })
+
+        elementsWithBlur.forEach((el, i) => {
+          ;(el as HTMLElement).style.filter = blurFilters[i]
+        })
+
         // Convert to blob
         const response = await fetch(dataUrl)
         const blob = await response.blob()
         const file = new File([blob], 'standings.png', { type: 'image/png' })
-        
+
         if (navigator.share && navigator.canShare({ files: [file] })) {
           await navigator.share({
             title: 'Espotz Standings',

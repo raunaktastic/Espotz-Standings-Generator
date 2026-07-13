@@ -119,19 +119,15 @@ export function OverallStandings({ variant, isThumbnail = false, data, tournamen
       <div className="absolute inset-0">
         {/* Primary radial glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-white/5 to-transparent rounded-full blur-3xl" />
-        
-        {/* Corner glows */}
-        <div className={`absolute top-0 right-0 w-[300px] h-[300px] bg-gradient-to-bl ${styles.bgSecondary} rounded-full blur-3xl opacity-60`} />
-        <div className={`absolute bottom-0 left-0 w-[300px] h-[300px] bg-gradient-to-tr ${styles.bgSecondary} rounded-full blur-3xl opacity-60`} />
-        
+
         {/* Diagonal overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/[0.02] to-transparent" />
-        
+
         {/* Grid pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
         </div>
-        
+
         {/* Gaming shapes */}
         <div className="absolute top-1/4 left-0 w-32 h-32 border-l-2 border-t-2 border-white/10 rounded-tl-3xl" />
         <div className="absolute bottom-1/4 right-0 w-32 h-32 border-r-2 border-b-2 border-white/10 rounded-br-3xl" />
