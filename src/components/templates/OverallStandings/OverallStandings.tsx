@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import type { OverallStandingsVariant, StandingsData } from '@/types'
 import { StandingsTable } from '@/components/templates/OverallStandings/StandingsTable'
 
@@ -10,7 +11,7 @@ interface OverallStandingsProps {
   gameName?: string
 }
 
-export function OverallStandings({ variant, isThumbnail = false, data, tournamentName, stageName, gameName }: OverallStandingsProps) {
+export const OverallStandings = forwardRef<HTMLDivElement, OverallStandingsProps>(({ variant, isThumbnail = false, data, tournamentName, stageName, gameName }, ref) => {
   const getVariantStyles = () => {
     switch (variant) {
       case 'pmgc':
@@ -114,60 +115,42 @@ export function OverallStandings({ variant, isThumbnail = false, data, tournamen
   }
 
   return (
-    <div className={`relative w-full h-full bg-gradient-to-br ${styles.bgPrimary} overflow-hidden`}>
-      {/* Layered Background Effects */}
-      <div className="absolute inset-0">
-        {/* Primary radial glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-white/5 to-transparent rounded-full blur-3xl" />
-
-        {/* Diagonal overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/[0.02] to-transparent" />
-
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
-        </div>
-
-        {/* Gaming shapes */}
-        <div className="absolute top-1/4 left-0 w-32 h-32 border-l-2 border-t-2 border-white/10 rounded-tl-3xl" />
-        <div className="absolute bottom-1/4 right-0 w-32 h-32 border-r-2 border-b-2 border-white/10 rounded-br-3xl" />
-      </div>
-
+    <div ref={ref} className={`relative w-full h-full bg-gradient-to-br ${styles.bgPrimary} overflow-hidden`}>
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col p-6">
+      <div className="relative z-10 h-full flex flex-col p-4">
         {/* Header Section */}
-        <div className="mb-5">
+        <div className="mb-3">
           {/* Logo */}
-          <div className="mb-4 flex items-center gap-2">
-            <img src="/favicon.svg" alt="Espotz" className="h-8 w-auto" />
-            <span className={`${isThumbnail ? 'text-xl' : 'text-3xl'} font-black ${styles.text} uppercase tracking-tight`}>ESPOTZ</span>
+          <div className="mb-2.5 flex items-center gap-2">
+            <img src="/favicon.svg" alt="Espotz" className="h-6 w-auto" />
+            <span className={`${isThumbnail ? 'text-xl' : 'text-2xl'} font-black ${styles.text} uppercase tracking-tight`}>ESPOTZ</span>
           </div>
-          
+
           {/* Tournament Name */}
-          <h1 className={`${isThumbnail ? 'text-xl' : 'text-4xl'} font-black ${styles.text} uppercase tracking-tight mb-2 leading-none`}>
+          <h1 className={`${isThumbnail ? 'text-xl' : 'text-3xl'} font-black ${styles.text} uppercase tracking-tight mb-1.5 leading-none`}>
             {mockData.tournamentName}
           </h1>
-          
+
           {/* Overall Standings Title */}
-          <h2 className={`${isThumbnail ? 'text-sm' : 'text-lg'} font-bold ${styles.textSecondary} uppercase tracking-wider mb-1`}>
+          <h2 className={`${isThumbnail ? 'text-sm' : 'text-base'} font-bold ${styles.textSecondary} uppercase tracking-wider mb-1`}>
             OVERALL STANDINGS
           </h2>
-          
+
           {/* Subtitle */}
-          <div className="flex flex-col gap-1">
-            <h3 className={`${isThumbnail ? 'text-xs' : 'text-sm'} font-bold ${styles.text} uppercase tracking-wider`}>
+          <div className="flex flex-col gap-0.5">
+            <h3 className={`${isThumbnail ? 'text-xs' : 'text-xs'} font-bold ${styles.text} uppercase tracking-wider`}>
               {mockData.stageName}
             </h3>
             {!isThumbnail && (
-              <span className={`${styles.textSecondary} text-xs font-medium opacity-70`}>{mockData.gameName}</span>
+              <span className={`${styles.textSecondary} text-[10px] font-medium opacity-70`}>{mockData.gameName}</span>
             )}
           </div>
         </div>
 
         {/* Standings Panel */}
         <div className="flex-1">
-          <div className={`bg-black/30 backdrop-blur-xl rounded-2xl border ${styles.border} p-4 shadow-2xl`}>
-            <StandingsTable 
+          <div className={`bg-black/30 backdrop-blur-xl rounded-xl border ${styles.border} p-3 shadow-2xl`}>
+            <StandingsTable
               entries={mockData.entries}
               variant={variant}
               isThumbnail={isThumbnail}
@@ -177,19 +160,19 @@ export function OverallStandings({ variant, isThumbnail = false, data, tournamen
 
         {/* Footer */}
         {!isThumbnail && (
-          <div className="mt-4 flex items-center justify-between">
-            <div className={`text-xs ${styles.text} opacity-50`}>
+          <div className="mt-2.5 flex items-center justify-between">
+            <div className={`text-[10px] ${styles.text} opacity-50`}>
               © 2024 Tournament Organizers
             </div>
-            <div className={`text-xs ${styles.text} opacity-50`}>
+            <div className={`text-[10px] ${styles.text} opacity-50`}>
               Official Standings
             </div>
           </div>
         )}
       </div>
 
-      {/* Bottom vignette */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
     </div>
   )
-}
+})
+
+OverallStandings.displayName = 'OverallStandings'

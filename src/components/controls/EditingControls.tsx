@@ -36,7 +36,7 @@ export function EditingControls({
   return (
     <div className="space-y-2 h-full flex flex-col">
       <h3 className="text-sm font-semibold text-purple-200/80 uppercase tracking-wider">Controls</h3>
-      
+
       <div className="flex-1 space-y-2 overflow-y-auto pr-1">
         {/* Variant Selection */}
         <div className="space-y-1">

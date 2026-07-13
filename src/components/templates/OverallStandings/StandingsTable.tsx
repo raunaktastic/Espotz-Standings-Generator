@@ -136,59 +136,59 @@ export function StandingsTable({ entries, variant, isThumbnail = false }: Standi
   }
 
   return (
-    <div className="h-full overflow-y-auto space-y-2">
+    <div className="h-full space-y-1.5">
       {/* Header */}
-      <div className={`grid grid-cols-7 gap-2 px-3 py-2 rounded-lg bg-gradient-to-r ${styles.header} backdrop-blur-sm`}>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">RANK</div>
-        <div className="col-span-2 text-xs font-bold uppercase tracking-wider">TEAM</div>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">MATCHES</div>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">WWCD</div>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">FIN. PTS.</div>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">POS. PTS.</div>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">TOTAL</div>
+      <div className={`grid grid-cols-7 gap-1.5 px-2 py-1.5 rounded-lg bg-gradient-to-r ${styles.header} backdrop-blur-sm`}>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-center">RANK</div>
+        <div className="col-span-2 text-[10px] font-bold uppercase tracking-wider">TEAM</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-center">MATCHES</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-center">WWCD</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-center">FIN. PTS.</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-center">POS. PTS.</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-center">TOTAL</div>
       </div>
 
       {/* Rows */}
       {entries.map((entry) => (
         <div
           key={entry.rank}
-          className={`grid grid-cols-7 gap-2 px-3 py-2.5 rounded-xl border ${styles.border} bg-gradient-to-r ${getRowBackground(entry.rank)} backdrop-blur-sm hover:scale-[1.02] transition-all duration-200`}
+          className={`grid grid-cols-7 gap-1.5 px-2 py-1.5 rounded-lg border ${styles.border} bg-gradient-to-r ${getRowBackground(entry.rank)} backdrop-blur-sm`}
         >
           {/* Rank */}
           <div className="flex items-center justify-center">
-            <div className={`w-9 h-9 flex items-center justify-center rounded-xl text-sm font-black bg-gradient-to-br ${getRankBadge()} shadow-lg`}>
+            <div className={`w-7 h-7 flex items-center justify-center rounded-lg text-xs font-black bg-gradient-to-br ${getRankBadge()} shadow-lg`}>
               {entry.rank}
             </div>
           </div>
 
           {/* Team */}
-          <div className="col-span-2 flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-lg backdrop-blur-sm">
+          <div className="col-span-2 flex items-center gap-1.5">
+            <div className="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center text-sm backdrop-blur-sm">
               {entry.teamLogo}
             </div>
             <div className="flex-1 min-w-0">
-              <div className={`text-sm font-bold ${styles.text} truncate`}>{entry.teamName}</div>
-              <div className={`text-xs ${styles.textSecondary} opacity-70`}>{entry.teamTag}</div>
+              <div className={`text-xs font-bold ${styles.text} truncate`}>{entry.teamName}</div>
+              <div className={`text-[10px] ${styles.textSecondary} opacity-70`}>{entry.teamTag}</div>
             </div>
           </div>
 
           {/* Matches */}
-          <div className={`flex items-center justify-center text-sm font-medium ${styles.text}`}>
+          <div className={`flex items-center justify-center text-xs font-medium ${styles.text}`}>
             {entry.matches}
           </div>
 
           {/* WWCD */}
-          <div className={`flex items-center justify-center text-sm font-black ${styles.accent}`}>
+          <div className={`flex items-center justify-center text-xs font-black ${styles.accent}`}>
             {entry.wwcd}
           </div>
 
           {/* Position Pts */}
-          <div className={`flex items-center justify-center text-sm font-medium ${styles.text}`}>
+          <div className={`flex items-center justify-center text-xs font-medium ${styles.text}`}>
             {entry.positionPts}
           </div>
 
           {/* Total */}
-          <div className={`flex items-center justify-center text-sm font-black ${styles.accent}`}>
+          <div className={`flex items-center justify-center text-xs font-black ${styles.accent}`}>
             {entry.total}
           </div>
         </div>

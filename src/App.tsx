@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { Trophy, Sparkles } from 'lucide-react'
 import { useAppState } from '@/hooks/useAppState'
 import { EditingControls } from '@/components/controls/EditingControls'
@@ -10,6 +10,7 @@ import SquareGenerator from '@/pages/SquareGenerator'
 import { toPng } from 'html-to-image'
 
 function StandingsGenerator() {
+  const navigate = useNavigate()
   const { state, setTemplate, setTemplateVariant, setTournamentName, setStageName, setGameName } = useAppState()
   const [graphicElement, setGraphicElement] = useState<HTMLDivElement | null>(null)
 
@@ -185,6 +186,12 @@ function StandingsGenerator() {
                 </p>
               </div>
             </div>
+            <button
+              onClick={() => navigate('/standings-generator/square')}
+              className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white border-0 shadow-lg shadow-purple-500/30 transition-all duration-200 hover:shadow-purple-500/50 hover:scale-105 text-sm font-medium"
+            >
+              Open Square Generator
+            </button>
           </div>
         </div>
       </header>
@@ -236,7 +243,7 @@ function StandingsGenerator() {
                 <Preview
                   template={state.template}
                   templateVariant={state.templateVariant as any}
-                  format={state.format}
+                  format="story"
                   tournamentName={state.tournamentName}
                   stageName={state.stageName}
                   gameName={state.gameName}
