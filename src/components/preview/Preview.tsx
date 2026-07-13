@@ -5,14 +5,17 @@ interface PreviewProps {
   template: Template
   templateVariant: TemplateVariant
   format: Format
+  tournamentName?: string
+  stageName?: string
+  gameName?: string
   onGraphicRef: (element: HTMLDivElement | null) => void
 }
 
-export function Preview({ template, templateVariant, format, onGraphicRef }: PreviewProps) {
+export function Preview({ template, templateVariant, format, tournamentName, stageName, gameName, onGraphicRef }: PreviewProps) {
   const aspectRatio = format === 'story' ? 'aspect-[9/16]' : 'aspect-square'
 
   const renderTemplate = () => {
-    const props = { variant: templateVariant as any, isThumbnail: false }
+    const props = { variant: templateVariant as any, isThumbnail: false, tournamentName, stageName, gameName }
     
     switch (template) {
       case 'overallStandings':

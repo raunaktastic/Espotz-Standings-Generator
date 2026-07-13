@@ -61,18 +61,18 @@ export function StandingsTable({ entries, variant, isThumbnail = false }: Standi
           rank2: 'from-gray-300 to-slate-400',
           rank3: 'from-amber-600 to-orange-700',
         }
-      case 'minimalWhite':
+      case 'darkGrey':
         return {
-          header: 'from-gray-200 to-slate-200',
-          row: 'bg-white hover:bg-gray-50',
-          rowTop3: 'from-gray-100 to-slate-100',
-          border: 'border-gray-300',
-          text: 'text-gray-900',
-          textSecondary: 'text-gray-600',
-          accent: 'text-gray-700',
+          header: 'from-gray-500/30 to-slate-500/30',
+          row: 'bg-white/5 hover:bg-white/10',
+          rowTop3: 'from-gray-500/20 to-slate-500/20',
+          border: 'border-gray-500/20',
+          text: 'text-white',
+          textSecondary: 'text-gray-300',
+          accent: 'text-gray-400',
           rank1: 'from-yellow-400 to-amber-500',
-          rank2: 'from-gray-400 to-slate-500',
-          rank3: 'from-amber-500 to-orange-600',
+          rank2: 'from-gray-300 to-slate-400',
+          rank3: 'from-amber-600 to-orange-700',
         }
       case 'emeraldMasters':
         return {
@@ -105,10 +105,7 @@ export function StandingsTable({ entries, variant, isThumbnail = false }: Standi
 
   const styles = getVariantStyles()
 
-  const getRankBadge = (rank: number) => {
-    if (rank === 1) return styles.rank1
-    if (rank === 2) return styles.rank2
-    if (rank === 3) return styles.rank3
+  const getRankBadge = () => {
     return 'from-white/10 to-white/5'
   }
 
@@ -125,7 +122,7 @@ export function StandingsTable({ entries, variant, isThumbnail = false }: Standi
             key={entry.rank}
             className={`flex items-center gap-2 p-2 rounded-xl border ${styles.border} bg-gradient-to-r ${getRowBackground(entry.rank)} backdrop-blur-sm`}
           >
-            <div className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-bold bg-gradient-to-br ${getRankBadge(entry.rank)} shadow-lg`}>
+            <div className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-bold bg-gradient-to-br ${getRankBadge()} shadow-lg`}>
               {entry.rank}
             </div>
             <div className="flex-1">
@@ -142,12 +139,13 @@ export function StandingsTable({ entries, variant, isThumbnail = false }: Standi
     <div className="h-full overflow-y-auto space-y-2">
       {/* Header */}
       <div className={`grid grid-cols-7 gap-2 px-3 py-2 rounded-lg bg-gradient-to-r ${styles.header} backdrop-blur-sm`}>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">Rank</div>
-        <div className="col-span-2 text-xs font-bold uppercase tracking-wider">Team</div>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">M</div>
+        <div className="text-xs font-bold uppercase tracking-wider text-center">RANK</div>
+        <div className="col-span-2 text-xs font-bold uppercase tracking-wider">TEAM</div>
+        <div className="text-xs font-bold uppercase tracking-wider text-center">MATCHES</div>
         <div className="text-xs font-bold uppercase tracking-wider text-center">WWCD</div>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">Pos</div>
-        <div className="text-xs font-bold uppercase tracking-wider text-center">Total</div>
+        <div className="text-xs font-bold uppercase tracking-wider text-center">FIN. PTS.</div>
+        <div className="text-xs font-bold uppercase tracking-wider text-center">POS. PTS.</div>
+        <div className="text-xs font-bold uppercase tracking-wider text-center">TOTAL</div>
       </div>
 
       {/* Rows */}
@@ -158,7 +156,7 @@ export function StandingsTable({ entries, variant, isThumbnail = false }: Standi
         >
           {/* Rank */}
           <div className="flex items-center justify-center">
-            <div className={`w-9 h-9 flex items-center justify-center rounded-xl text-sm font-black bg-gradient-to-br ${getRankBadge(entry.rank)} shadow-lg ${entry.rank <= 3 ? 'ring-2 ring-white/30' : ''}`}>
+            <div className={`w-9 h-9 flex items-center justify-center rounded-xl text-sm font-black bg-gradient-to-br ${getRankBadge()} shadow-lg`}>
               {entry.rank}
             </div>
           </div>

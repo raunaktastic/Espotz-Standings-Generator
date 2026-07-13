@@ -4,7 +4,7 @@ export type ThemePack = 'dark' | 'light'
 
 export type Template = 'overallStandings'
 
-export type OverallStandingsVariant = 'pmgc' | 'bgis' | 'blackGold' | 'darkRed' | 'minimalWhite' | 'emeraldMasters'
+export type OverallStandingsVariant = 'pmgc' | 'bgis' | 'blackGold' | 'darkRed' | 'darkGrey' | 'emeraldMasters'
 
 export type TemplateVariant = OverallStandingsVariant
 
@@ -15,6 +15,9 @@ export interface AppState {
   themePack: ThemePack
   format: Format
   showStats: boolean
+  tournamentName: string
+  stageName: string
+  gameName: string
 }
 
 export interface TemplateConfig {
@@ -26,11 +29,11 @@ export interface TemplateConfig {
 }
 
 export const TEMPLATE_CONFIGS: TemplateConfig[] = [
-  { id: 'overallStandings', name: 'Overall Standings', icon: '📊', category: 'overallStandings', variants: ['pmgc', 'bgis', 'blackGold', 'darkRed', 'minimalWhite', 'emeraldMasters'] },
+  { id: 'overallStandings', name: 'Overall Standings', icon: '📊', category: 'overallStandings', variants: ['pmgc', 'bgis', 'blackGold', 'darkRed', 'darkGrey', 'emeraldMasters'] },
 ]
 
 export const TEMPLATE_VARIANTS: Record<Template, TemplateVariant[]> = {
-  overallStandings: ['pmgc', 'bgis', 'blackGold', 'darkRed', 'minimalWhite', 'emeraldMasters'],
+  overallStandings: ['pmgc', 'bgis', 'blackGold', 'darkRed', 'darkGrey', 'emeraldMasters'],
 }
 
 export interface StandingEntry {

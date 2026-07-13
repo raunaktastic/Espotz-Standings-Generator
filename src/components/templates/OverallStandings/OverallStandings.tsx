@@ -5,9 +5,12 @@ interface OverallStandingsProps {
   variant: OverallStandingsVariant
   isThumbnail?: boolean
   data?: StandingsData
+  tournamentName?: string
+  stageName?: string
+  gameName?: string
 }
 
-export function OverallStandings({ variant, isThumbnail = false, data }: OverallStandingsProps) {
+export function OverallStandings({ variant, isThumbnail = false, data, tournamentName, stageName, gameName }: OverallStandingsProps) {
   const getVariantStyles = () => {
     switch (variant) {
       case 'pmgc':
@@ -54,16 +57,16 @@ export function OverallStandings({ variant, isThumbnail = false, data }: Overall
           glow: 'shadow-red-500/50',
           border: 'border-red-500/30',
         }
-      case 'minimalWhite':
+      case 'darkGrey':
         return {
-          bgPrimary: 'from-gray-100 via-white to-gray-200',
-          bgSecondary: 'from-gray-300/30 to-slate-300/30',
-          accent: 'from-gray-600 to-slate-700',
-          accentSecondary: 'from-slate-600 to-gray-700',
-          text: 'text-gray-900',
-          textSecondary: 'text-gray-600',
+          bgPrimary: 'from-gray-900 via-slate-900 to-gray-950',
+          bgSecondary: 'from-gray-600/20 to-slate-600/20',
+          accent: 'from-gray-400 to-slate-500',
+          accentSecondary: 'from-slate-400 to-gray-500',
+          text: 'text-white',
+          textSecondary: 'text-gray-300',
           glow: 'shadow-gray-500/30',
-          border: 'border-gray-400/40',
+          border: 'border-gray-500/30',
         }
       case 'emeraldMasters':
         return {
@@ -94,10 +97,10 @@ export function OverallStandings({ variant, isThumbnail = false, data }: Overall
 
   // Mock data for preview
   const mockData: StandingsData = data || {
-    tournamentName: 'CHAMPIONSHIP 2024',
-    stageName: 'GRAND FINALS',
-    gameName: 'PUBG MOBILE',
-    date: 'DAY 3',
+    tournamentName: tournamentName || 'CHAMPIONSHIP 2024',
+    stageName: stageName || 'GRAND FINALS',
+    gameName: gameName || 'PUBG MOBILE',
+    date: '',
     entries: [
       { rank: 1, teamLogo: '🏆', teamName: 'Team Alpha', teamTag: 'ALPHA', matches: 15, wwcd: 3, finishPts: 120, positionPts: 45, total: 165, support: 0, top8: 12, top12: 14, top16: 15 },
       { rank: 2, teamLogo: '🥈', teamName: 'Team Beta', teamTag: 'BETA', matches: 15, wwcd: 2, finishPts: 115, positionPts: 40, total: 155, support: 0, top8: 11, top12: 13, top16: 15 },
@@ -138,28 +141,29 @@ export function OverallStandings({ variant, isThumbnail = false, data }: Overall
       <div className="relative z-10 h-full flex flex-col p-6">
         {/* Header Section */}
         <div className="mb-5">
-          {/* Tournament Badge */}
-          <div className={`inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r ${styles.accent} rounded-full mb-4 shadow-lg ${styles.glow}`}>
-            <span className="text-white text-xs font-bold uppercase tracking-widest">Live</span>
+          {/* Logo */}
+          <div className="mb-4 flex items-center gap-2">
+            <img src="/favicon.svg" alt="Espotz" className="h-8 w-auto" />
+            <span className={`${isThumbnail ? 'text-xl' : 'text-3xl'} font-black ${styles.text} uppercase tracking-tight`}>ESPOTZ</span>
           </div>
           
-          {/* Main Title */}
-          <h1 className={`${isThumbnail ? 'text-2xl' : 'text-5xl'} font-black ${styles.text} uppercase tracking-tight mb-2 leading-none`}>
+          {/* Tournament Name */}
+          <h1 className={`${isThumbnail ? 'text-xl' : 'text-4xl'} font-black ${styles.text} uppercase tracking-tight mb-2 leading-none`}>
             {mockData.tournamentName}
           </h1>
           
+          {/* Overall Standings Title */}
+          <h2 className={`${isThumbnail ? 'text-sm' : 'text-lg'} font-bold ${styles.textSecondary} uppercase tracking-wider mb-1`}>
+            OVERALL STANDINGS
+          </h2>
+          
           {/* Subtitle */}
-          <div className="flex items-center gap-4">
-            <h2 className={`${isThumbnail ? 'text-sm' : 'text-xl'} font-bold ${styles.textSecondary} uppercase tracking-wider`}>
+          <div className="flex flex-col gap-1">
+            <h3 className={`${isThumbnail ? 'text-xs' : 'text-sm'} font-bold ${styles.text} uppercase tracking-wider`}>
               {mockData.stageName}
-            </h2>
+            </h3>
             {!isThumbnail && (
-              <>
-                <div className={`h-6 w-px bg-gradient-to-b ${styles.accent}`} />
-                <span className={`${styles.text} text-sm font-medium opacity-70`}>{mockData.gameName}</span>
-                <div className={`h-6 w-px bg-gradient-to-b ${styles.accent}`} />
-                <span className={`${styles.text} text-sm font-medium opacity-70`}>{mockData.date}</span>
-              </>
+              <span className={`${styles.textSecondary} text-xs font-medium opacity-70`}>{mockData.gameName}</span>
             )}
           </div>
         </div>

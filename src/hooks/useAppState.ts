@@ -8,6 +8,9 @@ const initialState: AppState = {
   themePack: 'dark',
   format: 'story',
   showStats: true,
+  tournamentName: 'Espotz Championship',
+  stageName: 'Grand Finals',
+  gameName: 'PUBG MOBILE',
 }
 
 export function useAppState() {
@@ -31,6 +34,15 @@ export function useAppState() {
   const setShowStats = (showStats: boolean) => 
     setState(prev => ({ ...prev, showStats }))
 
+  const setTournamentName = (tournamentName: string) => 
+    setState(prev => ({ ...prev, tournamentName }))
+
+  const setStageName = (stageName: string) => 
+    setState(prev => ({ ...prev, stageName }))
+
+  const setGameName = (gameName: string) => 
+    setState(prev => ({ ...prev, gameName }))
+
   return {
     state,
     setDataset,
@@ -39,5 +51,8 @@ export function useAppState() {
     setThemePack,
     setFormat,
     setShowStats,
+    setTournamentName,
+    setStageName,
+    setGameName,
   }
 }

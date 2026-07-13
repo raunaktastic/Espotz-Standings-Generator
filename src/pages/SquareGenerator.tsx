@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { Trophy, Sparkles } from 'lucide-react'
+import { Trophy, Sparkles, ArrowLeft } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { useAppState } from '@/hooks/useAppState'
 import { EditingControls } from '@/components/controls/EditingControls'
 import { Preview } from '@/components/preview/Preview'
 import { TemplateGallery } from '@/components/controls/TemplateGallery'
-import { TournamentDetails } from '@/pages/TournamentDetails'
-import SquareGenerator from '@/pages/SquareGenerator'
 import { toPng } from 'html-to-image'
 
-function StandingsGenerator() {
+function SquareGenerator() {
+  const navigate = useNavigate()
   const { state, setTemplate, setTemplateVariant, setTournamentName, setStageName, setGameName } = useAppState()
   const [graphicElement, setGraphicElement] = useState<HTMLDivElement | null>(null)
 
@@ -23,7 +22,7 @@ function StandingsGenerator() {
           height: graphicElement.offsetHeight * 4,
         })
         const link = document.createElement('a')
-        link.download = `espotz-${state.template}-${Date.now()}.png`
+        link.download = `espotz-square-${state.template}-${Date.now()}.png`
         link.href = dataUrl
         link.click()
       } catch (error) {
@@ -42,7 +41,6 @@ function StandingsGenerator() {
           height: graphicElement.offsetHeight * 4,
         })
         
-        // Convert to blob
         const response = await fetch(dataUrl)
         const blob = await response.blob()
         const file = new File([blob], 'standings.png', { type: 'image/png' })
@@ -54,9 +52,8 @@ function StandingsGenerator() {
             files: [file],
           })
         } else {
-          // Fallback: download
           const link = document.createElement('a')
-          link.download = `espotz-${state.template}-${Date.now()}.png`
+          link.download = `espotz-square-${state.template}-${Date.now()}.png`
           link.href = dataUrl
           link.click()
         }
@@ -68,13 +65,25 @@ function StandingsGenerator() {
 
   return (
     <div className="min-h-screen text-white relative">
-      {/* Fixed Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 -z-10" />
+      
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      </div>
 
-      {/* Header */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-xl">
         <div className="px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => navigate('/standings-generator')}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-200"
+              >
+                <ArrowLeft className="w-4 h-4 text-white/70" />
+                <span className="text-sm text-white/70">Back to Story</span>
+              </button>
+            </div>
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="absolute inset-0 bg-purple-500/30 blur-xl rounded-full animate-pulse" />
@@ -84,11 +93,11 @@ function StandingsGenerator() {
               </div>
               <div>
                 <h1 className="text-xl font-bold bg-gradient-to-r from-purple-200 to-indigo-200 bg-clip-text text-transparent">
-                  Espotz Standings Generator
+                  Espotz Square Generator
                 </h1>
                 <p className="text-xs text-purple-300/70 flex items-center gap-1">
                   <Sparkles className="w-3 h-3" />
-                  Professional Esports Graphics
+                  1:1 Format
                 </p>
               </div>
             </div>
@@ -96,11 +105,9 @@ function StandingsGenerator() {
         </div>
       </header>
 
-      {/* Main Content - 3 Column Layout */}
       <main className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 relative z-10">
         <div className="flex gap-3 sm:gap-4 items-start min-h-[calc(100vh-80px)] flex-col lg:flex-row">
-
-          {/* Left Column - Templates (Fixed 270px on desktop, full on mobile) */}
+          
           <div className="w-full lg:w-[270px] flex-shrink-0 order-1 lg:order-1">
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-3 sm:p-4 shadow-2xl lg:h-full">
               <TemplateGallery
@@ -110,7 +117,6 @@ function StandingsGenerator() {
             </div>
           </div>
 
-          {/* Middle Column - Controls (Fixed 400px on desktop, full on mobile) */}
           <div className="w-full lg:w-[400px] flex-shrink-0 order-2 lg:order-2">
             <div className="lg:h-full">
               <EditingControls
@@ -129,11 +135,10 @@ function StandingsGenerator() {
             </div>
           </div>
 
-          {/* Right Column - Live Preview (Fill remaining width) */}
           <div className="w-full lg:flex-1 min-w-0 order-3 lg:order-3">
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-3 sm:p-4 shadow-2xl lg:h-full">
               <div className="flex items-center justify-between mb-2 sm:mb-3">
-                <h3 className="text-xs sm:text-sm font-semibold text-purple-200/80 uppercase tracking-wider">Live Preview</h3>
+                <h3 className="text-xs sm:text-sm font-semibold text-purple-200/80 uppercase tracking-wider">Square Preview</h3>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                   <span className="text-xs text-green-400">Live</span>
@@ -143,7 +148,7 @@ function StandingsGenerator() {
                 <Preview
                   template={state.template}
                   templateVariant={state.templateVariant as any}
-                  format={state.format}
+                  format="square"
                   tournamentName={state.tournamentName}
                   stageName={state.stageName}
                   gameName={state.gameName}
@@ -159,15 +164,4 @@ function StandingsGenerator() {
   )
 }
 
-function App() {
-  return (
-    <Routes>
-      <Route path="/tournaments/:id" element={<TournamentDetails />} />
-      <Route path="/standings-generator" element={<StandingsGenerator />} />
-      <Route path="/standings-generator/square" element={<SquareGenerator />} />
-      <Route path="/" element={<Navigate to="/tournaments/1" replace />} />
-    </Routes>
-  )
-}
-
-export default App
+export default SquareGenerator
