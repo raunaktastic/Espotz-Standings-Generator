@@ -53,7 +53,6 @@ function StandingsGenerator() {
           pixelRatio: window.devicePixelRatio * 2,
           width: naturalWidth,
           height: naturalHeight,
-          backgroundColor: null,
           cacheBust: true,
         })
 
@@ -120,7 +119,6 @@ function StandingsGenerator() {
           pixelRatio: window.devicePixelRatio * 2,
           width: naturalWidth,
           height: naturalHeight,
-          backgroundColor: null,
           cacheBust: true,
         })
 

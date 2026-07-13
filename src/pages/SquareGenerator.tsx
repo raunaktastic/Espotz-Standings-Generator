@@ -52,7 +52,6 @@ function SquareGenerator() {
           pixelRatio: window.devicePixelRatio * 2,
           width: naturalWidth,
           height: naturalHeight,
-          backgroundColor: null,
           cacheBust: true,
         })
 
@@ -119,7 +118,6 @@ function SquareGenerator() {
           pixelRatio: window.devicePixelRatio * 2,
           width: naturalWidth,
           height: naturalHeight,
-          backgroundColor: null,
           cacheBust: true,
         })
 
