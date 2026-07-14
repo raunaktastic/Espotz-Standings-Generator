@@ -34,22 +34,26 @@ export function EditingControls({
   const currentVariants = TEMPLATE_VARIANTS[selectedTemplate]
 
   return (
-    <div className="space-y-2 h-full flex flex-col">
-      <h3 className="text-sm font-semibold text-purple-200/80 uppercase tracking-wider">Controls</h3>
+    <div className="space-y-5 h-full flex flex-col">
+      <div className="flex items-center gap-2">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <h3 className="text-xs font-black text-white/50 uppercase tracking-widest">Controls</h3>
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      </div>
 
-      <div className="flex-1 space-y-2 overflow-y-auto pr-1">
+      <div className="flex-1 space-y-5 overflow-y-auto pr-1">
         {/* Variant Selection */}
-        <div className="space-y-1">
-          <Label className="text-purple-200/70 text-xs font-medium">Template Variant</Label>
-          <div className="flex flex-wrap gap-1.5">
+        <div className="space-y-2">
+          <Label className="text-white/60 text-xs font-bold uppercase tracking-wider">Template Variant</Label>
+          <div className="flex flex-wrap gap-2">
             {currentVariants.map((variant) => (
               <button
                 key={variant}
                 onClick={() => onVariantChange(variant as TemplateVariant)}
-                className={`px-2 py-1 rounded text-xs font-medium capitalize transition-all duration-200 ${
+                className={`px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
                   selectedVariant === variant
-                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30'
-                    : 'bg-white/5 text-white/70 hover:bg-white/10 border border-white/10'
+                    ? 'bg-gradient-to-r from-[#7f13eb] to-[#8b5cf6] text-white shadow-lg shadow-[#7f13eb]/30 border border-[#7f13eb]/40'
+                    : 'bg-white/[0.03] text-white/60 hover:bg-white/[0.06] border border-white/[0.08] hover:border-white/[0.15]'
                 }`}
               >
                 {variant}
@@ -59,59 +63,72 @@ export function EditingControls({
         </div>
 
         {/* Tournament Name */}
-        <div className="space-y-1">
-          <Label className="text-purple-200/70 text-xs font-medium">Tournament Name</Label>
-          <input
-            type="text"
-            value={tournamentName}
-            onChange={(e) => onTournamentNameChange(e.target.value)}
-            className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 transition-all duration-200 placeholder-white/30"
-            placeholder="Enter tournament name"
-          />
+        <div className="space-y-2">
+          <Label className="text-white/60 text-xs font-bold uppercase tracking-wider">Tournament Name</Label>
+          <div className="relative">
+            <input
+              type="text"
+              value={tournamentName}
+              onChange={(e) => onTournamentNameChange(e.target.value)}
+              className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#7f13eb]/50 focus:ring-1 focus:ring-[#7f13eb]/20 transition-all duration-300 placeholder-white/30 backdrop-blur-sm"
+              placeholder="Enter tournament name"
+            />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#7f13eb]/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          </div>
         </div>
 
         {/* Stage */}
-        <div className="space-y-1">
-          <Label className="text-purple-200/70 text-xs font-medium">Stage</Label>
-          <input
-            type="text"
-            value={stageName}
-            onChange={(e) => onStageNameChange(e.target.value)}
-            className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 transition-all duration-200 placeholder-white/30"
-            placeholder="Enter stage name"
-          />
+        <div className="space-y-2">
+          <Label className="text-white/60 text-xs font-bold uppercase tracking-wider">Stage</Label>
+          <div className="relative">
+            <input
+              type="text"
+              value={stageName}
+              onChange={(e) => onStageNameChange(e.target.value)}
+              className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#7f13eb]/50 focus:ring-1 focus:ring-[#7f13eb]/20 transition-all duration-300 placeholder-white/30 backdrop-blur-sm"
+              placeholder="Enter stage name"
+            />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#7f13eb]/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          </div>
         </div>
 
         {/* Game */}
-        <div className="space-y-1">
-          <Label className="text-purple-200/70 text-xs font-medium">Game</Label>
-          <input
-            type="text"
-            value={gameName}
-            onChange={(e) => onGameNameChange(e.target.value)}
-            className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 transition-all duration-200 placeholder-white/30"
-            placeholder="Enter game name"
-          />
+        <div className="space-y-2">
+          <Label className="text-white/60 text-xs font-bold uppercase tracking-wider">Game</Label>
+          <div className="relative">
+            <input
+              type="text"
+              value={gameName}
+              onChange={(e) => onGameNameChange(e.target.value)}
+              className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#7f13eb]/50 focus:ring-1 focus:ring-[#7f13eb]/20 transition-all duration-300 placeholder-white/30 backdrop-blur-sm"
+              placeholder="Enter game name"
+            />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#7f13eb]/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          </div>
         </div>
 
       </div>
 
       {/* Action Buttons */}
-      <div className="space-y-1.5 pt-1">
+      <div className="space-y-3 pt-2">
         <Button 
           onClick={onExport}
-          className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white border-0 shadow-lg shadow-purple-500/30 rounded-lg py-2.5 font-medium transition-all duration-200 hover:shadow-purple-500/50 hover:scale-105"
+          className="group relative w-full bg-gradient-to-r from-[#7f13eb] to-[#8b5cf6] text-white border-0 shadow-xl shadow-[#7f13eb]/30 rounded-xl py-3 font-bold transition-all duration-300 hover:shadow-[#7f13eb]/50 hover:scale-[1.02] active:scale-[0.98]"
         >
-          <Download className="w-4 h-4 mr-2" />
-          Export PNG
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            <Download className="w-4 h-4" />
+            Export PNG
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#8b5cf6] to-[#7f13eb] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Button>
         <Button 
           onClick={onShare}
-          variant="outline"
-          className="w-full border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-white rounded-lg py-2.5 font-medium transition-all duration-200 hover:scale-105"
+          className="group relative w-full bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] text-white rounded-xl py-3 font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:border-white/[0.15]"
         >
-          <Share2 className="w-4 h-4 mr-2" />
-          Share
+          <span className="flex items-center justify-center gap-2">
+            <Share2 className="w-4 h-4" />
+            Share
+          </span>
         </Button>
       </div>
     </div>

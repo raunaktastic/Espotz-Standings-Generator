@@ -15,7 +15,7 @@ export function Preview({ template, templateVariant, format, tournamentName, sta
   const aspectRatio = format === 'story' ? 'aspect-[9/16]' : 'aspect-square'
 
   const renderTemplate = () => {
-    const props = { variant: templateVariant as any, isThumbnail: false, tournamentName, stageName, gameName }
+    const props = { variant: templateVariant, isThumbnail: false, tournamentName, stageName, gameName }
     
     switch (template) {
       case 'overallStandings':

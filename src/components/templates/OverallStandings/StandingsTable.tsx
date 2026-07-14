@@ -2,197 +2,178 @@ import type { StandingEntry, OverallStandingsVariant } from '@/types'
 
 interface StandingsTableProps {
   entries: StandingEntry[]
-  variant: OverallStandingsVariant
+  variant?: OverallStandingsVariant
   isThumbnail?: boolean
 }
 
-export function StandingsTable({ entries, variant, isThumbnail = false }: StandingsTableProps) {
+export function StandingsTable({ entries, variant = 'pmgc', isThumbnail = false }: StandingsTableProps) {
+  // Variant-specific styling
   const getVariantStyles = () => {
     switch (variant) {
       case 'pmgc':
         return {
-          header: 'from-cyan-500/30 to-blue-500/30',
-          row: 'bg-white/5 hover:bg-white/10',
-          rowTop3: 'from-cyan-500/20 to-blue-500/20',
-          border: 'border-cyan-500/20',
-          text: 'text-white',
-          textSecondary: 'text-cyan-200',
-          accent: 'text-cyan-400',
-          rank1: 'from-yellow-400 to-amber-500',
-          rank2: 'from-gray-300 to-slate-400',
-          rank3: 'from-amber-600 to-orange-700',
+          primary: '#7f13eb',
+          secondary: '#8b5cf6',
+          accent: '#a855f7',
+          headerGradient: 'from-[#7f13eb]/15 via-[#8b5cf6]/10 to-transparent',
         }
       case 'bgis':
         return {
-          header: 'from-purple-500/30 to-violet-500/30',
-          row: 'bg-white/5 hover:bg-white/10',
-          rowTop3: 'from-purple-500/20 to-violet-500/20',
-          border: 'border-purple-500/20',
-          text: 'text-white',
-          textSecondary: 'text-purple-200',
-          accent: 'text-purple-400',
-          rank1: 'from-yellow-400 to-amber-500',
-          rank2: 'from-gray-300 to-slate-400',
-          rank3: 'from-amber-600 to-orange-700',
+          primary: '#dc2626',
+          secondary: '#ef4444',
+          accent: '#f87171',
+          headerGradient: 'from-[#dc2626]/15 via-[#ef4444]/10 to-transparent',
         }
       case 'blackGold':
         return {
-          header: 'from-yellow-500/25 to-amber-500/25',
-          row: 'bg-white/5 hover:bg-white/10',
-          rowTop3: 'from-yellow-500/15 to-amber-500/15',
-          border: 'border-yellow-500/20',
-          text: 'text-white',
-          textSecondary: 'text-yellow-200',
-          accent: 'text-yellow-400',
-          rank1: 'from-yellow-300 to-amber-400',
-          rank2: 'from-gray-200 to-slate-300',
-          rank3: 'from-amber-500 to-orange-600',
+          primary: '#f59e0b',
+          secondary: '#fbbf24',
+          accent: '#fbbf24',
+          headerGradient: 'from-[#f59e0b]/15 via-[#fbbf24]/10 to-transparent',
         }
       case 'darkRed':
         return {
-          header: 'from-red-500/30 to-orange-500/30',
-          row: 'bg-white/5 hover:bg-white/10',
-          rowTop3: 'from-red-500/20 to-orange-500/20',
-          border: 'border-red-500/20',
-          text: 'text-white',
-          textSecondary: 'text-red-200',
-          accent: 'text-red-400',
-          rank1: 'from-yellow-400 to-amber-500',
-          rank2: 'from-gray-300 to-slate-400',
-          rank3: 'from-amber-600 to-orange-700',
+          primary: '#991b1b',
+          secondary: '#b91c1c',
+          accent: '#fca5a5',
+          headerGradient: 'from-[#991b1b]/15 via-[#b91c1c]/10 to-transparent',
         }
       case 'darkGrey':
         return {
-          header: 'from-gray-500/30 to-slate-500/30',
-          row: 'bg-white/5 hover:bg-white/10',
-          rowTop3: 'from-gray-500/20 to-slate-500/20',
-          border: 'border-gray-500/20',
-          text: 'text-white',
-          textSecondary: 'text-gray-300',
-          accent: 'text-gray-400',
-          rank1: 'from-yellow-400 to-amber-500',
-          rank2: 'from-gray-300 to-slate-400',
-          rank3: 'from-amber-600 to-orange-700',
+          primary: '#6b7280',
+          secondary: '#9ca3af',
+          accent: '#9ca3af',
+          headerGradient: 'from-[#6b7280]/15 via-[#9ca3af]/10 to-transparent',
         }
       case 'emeraldMasters':
         return {
-          header: 'from-emerald-500/30 to-teal-500/30',
-          row: 'bg-white/5 hover:bg-white/10',
-          rowTop3: 'from-emerald-500/20 to-teal-500/20',
-          border: 'border-emerald-500/20',
-          text: 'text-white',
-          textSecondary: 'text-emerald-200',
-          accent: 'text-emerald-400',
-          rank1: 'from-yellow-400 to-amber-500',
-          rank2: 'from-gray-300 to-slate-400',
-          rank3: 'from-amber-600 to-orange-700',
+          primary: '#059669',
+          secondary: '#10b981',
+          accent: '#34d399',
+          headerGradient: 'from-[#059669]/15 via-[#10b981]/10 to-transparent',
         }
       default:
         return {
-          header: 'from-cyan-500/30 to-blue-500/30',
-          row: 'bg-white/5 hover:bg-white/10',
-          rowTop3: 'from-cyan-500/20 to-blue-500/20',
-          border: 'border-cyan-500/20',
-          text: 'text-white',
-          textSecondary: 'text-cyan-200',
-          accent: 'text-cyan-400',
-          rank1: 'from-yellow-400 to-amber-500',
-          rank2: 'from-gray-300 to-slate-400',
-          rank3: 'from-amber-600 to-orange-700',
+          primary: '#7f13eb',
+          secondary: '#8b5cf6',
+          accent: '#a855f7',
+          headerGradient: 'from-[#7f13eb]/15 via-[#8b5cf6]/10 to-transparent',
         }
     }
   }
 
   const styles = getVariantStyles()
-
-  const getRankBadge = () => {
-    return 'from-white/10 to-white/5'
-  }
-
-  const getRowBackground = (rank: number) => {
-    if (rank <= 3) return styles.rowTop3
-    return styles.row
-  }
-
   if (isThumbnail) {
     return (
-      <div className="space-y-1.5">
-        {entries.slice(0, 3).map((entry) => (
-          <div
-            key={entry.rank}
-            className={`flex items-center gap-2 p-2 rounded-xl border ${styles.border} bg-gradient-to-r ${getRowBackground(entry.rank)} backdrop-blur-sm`}
-          >
-            <div className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-bold bg-gradient-to-br ${getRankBadge()} shadow-lg`}>
-              {entry.rank}
-            </div>
-            <div className="flex-1">
-              <div className={`text-xs font-bold ${styles.text}`}>{entry.teamTag}</div>
-            </div>
-            <div className={`text-sm font-black ${styles.accent}`}>{entry.total}</div>
+      <div className="h-full flex flex-col">
+        {/* Header */}
+        <div className={`px-2 py-1.5 bg-gradient-to-r ${styles.headerGradient} border-b border-white/10`}>
+          <div className="grid grid-cols-7 gap-1">
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">#</div>
+            <div className="col-span-2 text-[8px] font-black uppercase tracking-widest text-white/50">Team</div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">M</div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">W</div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">F</div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">P</div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">Total</div>
           </div>
-        ))}
+        </div>
+
+        {/* Rows */}
+        <div className="flex-1">
+          {entries.map((entry, index) => (
+            <div
+              key={entry.rank}
+              className={`relative group px-2 py-1 border-b border-white/[0.03] transition-all ${
+                index === 0 ? 'bg-gradient-to-r from-yellow-500/8 via-transparent to-transparent' :
+                index === 1 ? 'bg-gradient-to-r from-gray-400/8 via-transparent to-transparent' :
+                index === 2 ? 'bg-gradient-to-r from-amber-600/8 via-transparent to-transparent' :
+                'hover:bg-white/[0.02]'
+              }`}
+            >
+              <div className="grid grid-cols-7 gap-1 items-center">
+                {/* Rank */}
+                <div className="flex items-center justify-center">
+                  <div className={`w-5 h-5 flex items-center justify-center rounded-sm font-black text-[9px] ${
+                    entry.rank === 1 ? 'bg-gradient-to-br from-yellow-400 to-amber-500 text-black shadow-sm shadow-yellow-500/30' :
+                    entry.rank === 2 ? 'bg-gradient-to-br from-gray-300 to-slate-400 text-black shadow-sm shadow-gray-400/30' :
+                    entry.rank === 3 ? 'bg-gradient-to-br from-amber-600 to-orange-700 text-white shadow-sm shadow-amber-600/30' :
+                    'bg-white/10 text-white'
+                  }`}>
+                    {entry.rank}
+                  </div>
+                </div>
+
+                {/* Team */}
+                <div className="col-span-2 min-w-0">
+                  <div className="text-[9px] font-black text-white truncate uppercase tracking-tight leading-none">{entry.teamName}</div>
+                  <div className="text-[7px] text-white/40 uppercase tracking-wider leading-none">{entry.teamTag}</div>
+                </div>
+
+                {/* Stats */}
+                <div className="text-[9px] font-bold text-white/70 text-center leading-none">{entry.matches}</div>
+                <div className="text-[9px] font-bold text-white/70 text-center leading-none">{entry.wwcd}</div>
+                <div className="text-[9px] font-bold text-white/70 text-center leading-none">{entry.finishPts}</div>
+                <div className="text-[9px] font-bold text-white/70 text-center leading-none">{entry.positionPts}</div>
+                <div className="text-[9px] font-black text-white text-center leading-none">{entry.total}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="h-full space-y-1.5">
+    <div className="h-full flex flex-col">
       {/* Header */}
-      <div className={`grid grid-cols-7 gap-1.5 px-2 py-1.5 rounded-lg bg-gradient-to-r ${styles.header} backdrop-blur-sm`}>
-        <div className="text-[10px] font-bold uppercase tracking-wider text-center">RANK</div>
-        <div className="col-span-2 text-[10px] font-bold uppercase tracking-wider">TEAM</div>
-        <div className="text-[10px] font-bold uppercase tracking-wider text-center">MATCHES</div>
-        <div className="text-[10px] font-bold uppercase tracking-wider text-center">WWCD</div>
-        <div className="text-[10px] font-bold uppercase tracking-wider text-center">FIN. PTS.</div>
-        <div className="text-[10px] font-bold uppercase tracking-wider text-center">POS. PTS.</div>
-        <div className="text-[10px] font-bold uppercase tracking-wider text-center">TOTAL</div>
+      <div className={`px-4 py-2 bg-gradient-to-r ${styles.headerGradient} border-b border-white/10`}>
+        <div className="grid grid-cols-5 gap-2">
+          <div className="text-[9px] font-black uppercase tracking-widest text-white/50 text-center">#</div>
+          <div className="col-span-2 text-[9px] font-black uppercase tracking-widest text-white/50">Team</div>
+          <div className="text-[9px] font-black uppercase tracking-widest text-white/50 text-center">M</div>
+          <div className="text-[9px] font-black uppercase tracking-widest text-white/50 text-center">Total</div>
+        </div>
       </div>
 
       {/* Rows */}
-      {entries.map((entry) => (
-        <div
-          key={entry.rank}
-          className={`grid grid-cols-7 gap-1.5 px-2 py-1.5 rounded-lg border ${styles.border} bg-gradient-to-r ${getRowBackground(entry.rank)} backdrop-blur-sm`}
-        >
-          {/* Rank */}
-          <div className="flex items-center justify-center">
-            <div className={`w-7 h-7 flex items-center justify-center rounded-lg text-xs font-black bg-gradient-to-br ${getRankBadge()} shadow-lg`}>
-              {entry.rank}
+      <div className="flex-1">
+        {entries.map((entry, index) => (
+          <div
+            key={entry.rank}
+            className={`relative group px-4 py-2 border-b border-white/[0.03] transition-all ${
+              index === 0 ? 'bg-gradient-to-r from-yellow-500/8 via-transparent to-transparent' :
+              index === 1 ? 'bg-gradient-to-r from-gray-400/8 via-transparent to-transparent' :
+              index === 2 ? 'bg-gradient-to-r from-amber-600/8 via-transparent to-transparent' :
+              'hover:bg-white/[0.02]'
+            }`}
+          >
+            <div className="grid grid-cols-5 gap-2 items-center">
+              {/* Rank */}
+              <div className="flex items-center justify-center">
+                <div className={`w-7 h-7 flex items-center justify-center rounded-lg font-black text-xs ${
+                  entry.rank === 1 ? 'bg-gradient-to-br from-yellow-400 to-amber-500 text-black shadow-lg shadow-yellow-500/30' :
+                  entry.rank === 2 ? 'bg-gradient-to-br from-gray-300 to-slate-400 text-black shadow-lg shadow-gray-400/30' :
+                  entry.rank === 3 ? 'bg-gradient-to-br from-amber-600 to-orange-700 text-white shadow-lg shadow-amber-600/30' :
+                  'bg-white/10 text-white'
+                }`}>
+                  {entry.rank}
+                </div>
+              </div>
+
+              {/* Team */}
+              <div className="col-span-2 flex-1 min-w-0">
+                <div className="text-xs font-black text-white truncate uppercase tracking-tight">{entry.teamName}</div>
+                <div className="text-[9px] text-white/40 uppercase tracking-wider">{entry.teamTag}</div>
+              </div>
+
+              {/* Stats */}
+              <div className="text-[10px] font-bold text-white/70 text-center">{entry.matches}</div>
+              <div className="text-xs font-black text-white text-center">{entry.total}</div>
             </div>
           </div>
-
-          {/* Team */}
-          <div className="col-span-2 flex items-center gap-1.5">
-            <div className="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center text-sm backdrop-blur-sm">
-              {entry.teamLogo}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className={`text-xs font-bold ${styles.text} truncate`}>{entry.teamName}</div>
-              <div className={`text-[10px] ${styles.textSecondary} opacity-70`}>{entry.teamTag}</div>
-            </div>
-          </div>
-
-          {/* Matches */}
-          <div className={`flex items-center justify-center text-xs font-medium ${styles.text}`}>
-            {entry.matches}
-          </div>
-
-          {/* WWCD */}
-          <div className={`flex items-center justify-center text-xs font-black ${styles.accent}`}>
-            {entry.wwcd}
-          </div>
-
-          {/* Position Pts */}
-          <div className={`flex items-center justify-center text-xs font-medium ${styles.text}`}>
-            {entry.positionPts}
-          </div>
-
-          {/* Total */}
-          <div className={`flex items-center justify-center text-xs font-black ${styles.accent}`}>
-            {entry.total}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import type { OverallStandingsVariant, StandingsData } from '@/types'
 import { StandingsTable } from '@/components/templates/OverallStandings/StandingsTable'
 
 interface OverallStandingsProps {
-  variant: OverallStandingsVariant
+  variant?: OverallStandingsVariant
   isThumbnail?: boolean
   data?: StandingsData
   tournamentName?: string
@@ -11,145 +11,202 @@ interface OverallStandingsProps {
   gameName?: string
 }
 
-export const OverallStandings = forwardRef<HTMLDivElement, OverallStandingsProps>(({ variant, isThumbnail = false, data, tournamentName, stageName, gameName }, ref) => {
+export const OverallStandings = forwardRef<HTMLDivElement, OverallStandingsProps>(({ variant = 'pmgc', isThumbnail = false, data, tournamentName, stageName, gameName }, ref) => {
+  // Variant-specific styling
   const getVariantStyles = () => {
     switch (variant) {
       case 'pmgc':
         return {
-          bgPrimary: 'from-slate-900 via-blue-950 to-slate-900',
-          bgSecondary: 'from-cyan-600/20 to-blue-600/20',
-          accent: 'from-cyan-400 to-blue-500',
-          accentSecondary: 'from-blue-500 to-cyan-600',
-          text: 'text-white',
-          textSecondary: 'text-cyan-200',
-          glow: 'shadow-cyan-500/50',
-          border: 'border-cyan-500/30',
+          primary: '#7f13eb',
+          secondary: '#8b5cf6',
+          accent: '#d8b4fe',
+          bgGradient: 'from-[#7f13eb]/30 via-[#7f13eb]/10 to-transparent',
+          accentGradient: 'from-[#7f13eb] to-[#8b5cf6]',
         }
       case 'bgis':
         return {
-          bgPrimary: 'from-slate-900 via-purple-950 to-slate-900',
-          bgSecondary: 'from-purple-600/20 to-violet-600/20',
-          accent: 'from-purple-400 to-violet-500',
-          accentSecondary: 'from-violet-500 to-purple-600',
-          text: 'text-white',
-          textSecondary: 'text-purple-200',
-          glow: 'shadow-purple-500/50',
-          border: 'border-purple-500/30',
+          primary: '#dc2626',
+          secondary: '#ef4444',
+          accent: '#fca5a5',
+          bgGradient: 'from-[#dc2626]/30 via-[#dc2626]/10 to-transparent',
+          accentGradient: 'from-[#dc2626] to-[#ef4444]',
         }
       case 'blackGold':
         return {
-          bgPrimary: 'from-black via-gray-950 to-black',
-          bgSecondary: 'from-yellow-600/15 to-amber-600/15',
-          accent: 'from-yellow-400 to-amber-500',
-          accentSecondary: 'from-amber-500 to-yellow-600',
-          text: 'text-white',
-          textSecondary: 'text-yellow-200',
-          glow: 'shadow-yellow-500/50',
-          border: 'border-yellow-500/30',
+          primary: '#f59e0b',
+          secondary: '#fbbf24',
+          accent: '#fcd34d',
+          bgGradient: 'from-[#f59e0b]/30 via-[#f59e0b]/10 to-transparent',
+          accentGradient: 'from-[#f59e0b] to-[#fbbf24]',
         }
       case 'darkRed':
         return {
-          bgPrimary: 'from-slate-900 via-red-950 to-slate-900',
-          bgSecondary: 'from-red-600/20 to-orange-600/20',
-          accent: 'from-red-400 to-orange-500',
-          accentSecondary: 'from-orange-500 to-red-600',
-          text: 'text-white',
-          textSecondary: 'text-red-200',
-          glow: 'shadow-red-500/50',
-          border: 'border-red-500/30',
+          primary: '#991b1b',
+          secondary: '#b91c1c',
+          accent: '#fecaca',
+          bgGradient: 'from-[#991b1b]/30 via-[#991b1b]/10 to-transparent',
+          accentGradient: 'from-[#991b1b] to-[#b91c1c]',
         }
       case 'darkGrey':
         return {
-          bgPrimary: 'from-gray-900 via-slate-900 to-gray-950',
-          bgSecondary: 'from-gray-600/20 to-slate-600/20',
-          accent: 'from-gray-400 to-slate-500',
-          accentSecondary: 'from-slate-400 to-gray-500',
-          text: 'text-white',
-          textSecondary: 'text-gray-300',
-          glow: 'shadow-gray-500/30',
-          border: 'border-gray-500/30',
+          primary: '#6b7280',
+          secondary: '#9ca3af',
+          accent: '#d1d5db',
+          bgGradient: 'from-[#6b7280]/30 via-[#6b7280]/10 to-transparent',
+          accentGradient: 'from-[#6b7280] to-[#9ca3af]',
         }
       case 'emeraldMasters':
         return {
-          bgPrimary: 'from-slate-900 via-emerald-950 to-slate-900',
-          bgSecondary: 'from-emerald-600/20 to-teal-600/20',
-          accent: 'from-emerald-400 to-teal-500',
-          accentSecondary: 'from-teal-500 to-emerald-600',
-          text: 'text-white',
-          textSecondary: 'text-emerald-200',
-          glow: 'shadow-emerald-500/50',
-          border: 'border-emerald-500/30',
+          primary: '#059669',
+          secondary: '#10b981',
+          accent: '#6ee7b7',
+          bgGradient: 'from-[#059669]/30 via-[#059669]/10 to-transparent',
+          accentGradient: 'from-[#059669] to-[#10b981]',
         }
       default:
         return {
-          bgPrimary: 'from-slate-900 via-blue-950 to-slate-900',
-          bgSecondary: 'from-cyan-600/20 to-blue-600/20',
-          accent: 'from-cyan-400 to-blue-500',
-          accentSecondary: 'from-blue-500 to-cyan-600',
-          text: 'text-white',
-          textSecondary: 'text-cyan-200',
-          glow: 'shadow-cyan-500/50',
-          border: 'border-cyan-500/30',
+          primary: '#7f13eb',
+          secondary: '#8b5cf6',
+          accent: '#d8b4fe',
+          bgGradient: 'from-[#7f13eb]/30 via-[#7f13eb]/10 to-transparent',
+          accentGradient: 'from-[#7f13eb] to-[#8b5cf6]',
         }
     }
   }
 
   const styles = getVariantStyles()
 
-  // Mock data for preview
+  // Mock data for preview - 12 teams
   const mockData: StandingsData = data || {
     tournamentName: tournamentName || 'CHAMPIONSHIP 2024',
     stageName: stageName || 'GRAND FINALS',
     gameName: gameName || 'PUBG MOBILE',
     date: '',
     entries: [
-      { rank: 1, teamLogo: '🏆', teamName: 'Team Alpha', teamTag: 'ALPHA', matches: 15, wwcd: 3, finishPts: 120, positionPts: 45, total: 165, support: 0, top8: 12, top12: 14, top16: 15 },
-      { rank: 2, teamLogo: '🥈', teamName: 'Team Beta', teamTag: 'BETA', matches: 15, wwcd: 2, finishPts: 115, positionPts: 40, total: 155, support: 0, top8: 11, top12: 13, top16: 15 },
-      { rank: 3, teamLogo: '🥉', teamName: 'Team Gamma', teamTag: 'GAMMA', matches: 15, wwcd: 2, finishPts: 110, positionPts: 35, total: 145, support: 0, top8: 10, top12: 12, top16: 15 },
-      { rank: 4, teamLogo: '4️⃣', teamName: 'Team Delta', teamTag: 'DELTA', matches: 15, wwcd: 1, finishPts: 105, positionPts: 30, total: 135, support: 0, top8: 9, top12: 11, top16: 15 },
-      { rank: 5, teamLogo: '5️⃣', teamName: 'Team Epsilon', teamTag: 'EPS', matches: 15, wwcd: 1, finishPts: 100, positionPts: 25, total: 125, support: 0, top8: 8, top12: 10, top16: 15 },
-      { rank: 6, teamLogo: '6️⃣', teamName: 'Team Zeta', teamTag: 'ZETA', matches: 15, wwcd: 1, finishPts: 95, positionPts: 20, total: 115, support: 0, top8: 7, top12: 9, top16: 15 },
-      { rank: 7, teamLogo: '7️⃣', teamName: 'Team Eta', teamTag: 'ETA', matches: 15, wwcd: 0, finishPts: 90, positionPts: 18, total: 108, support: 0, top8: 6, top12: 8, top16: 15 },
-      { rank: 8, teamLogo: '8️⃣', teamName: 'Team Theta', teamTag: 'THETA', matches: 15, wwcd: 0, finishPts: 85, positionPts: 15, total: 100, support: 0, top8: 5, top12: 7, top16: 15 },
+      { rank: 1, teamLogo: '', teamName: 'Team Alpha', teamTag: 'ALPHA', matches: 15, wwcd: 3, finishPts: 120, positionPts: 45, total: 165, support: 0, top8: 12, top12: 14, top16: 15 },
+      { rank: 2, teamLogo: '', teamName: 'Team Beta', teamTag: 'BETA', matches: 15, wwcd: 2, finishPts: 115, positionPts: 40, total: 155, support: 0, top8: 11, top12: 13, top16: 15 },
+      { rank: 3, teamLogo: '', teamName: 'Team Gamma', teamTag: 'GAMMA', matches: 15, wwcd: 2, finishPts: 110, positionPts: 35, total: 145, support: 0, top8: 10, top12: 12, top16: 15 },
+      { rank: 4, teamLogo: '', teamName: 'Team Delta', teamTag: 'DELTA', matches: 15, wwcd: 1, finishPts: 105, positionPts: 30, total: 135, support: 0, top8: 9, top12: 11, top16: 15 },
+      { rank: 5, teamLogo: '', teamName: 'Team Epsilon', teamTag: 'EPS', matches: 15, wwcd: 1, finishPts: 100, positionPts: 25, total: 125, support: 0, top8: 8, top12: 10, top16: 15 },
+      { rank: 6, teamLogo: '', teamName: 'Team Zeta', teamTag: 'ZETA', matches: 15, wwcd: 1, finishPts: 95, positionPts: 20, total: 115, support: 0, top8: 7, top12: 9, top16: 15 },
+      { rank: 7, teamLogo: '', teamName: 'Team Eta', teamTag: 'ETA', matches: 15, wwcd: 0, finishPts: 90, positionPts: 18, total: 108, support: 0, top8: 6, top12: 8, top16: 15 },
+      { rank: 8, teamLogo: '', teamName: 'Team Theta', teamTag: 'THETA', matches: 15, wwcd: 0, finishPts: 85, positionPts: 15, total: 100, support: 0, top8: 5, top12: 7, top16: 15 },
+      { rank: 9, teamLogo: '', teamName: 'Team Iota', teamTag: 'IOTA', matches: 15, wwcd: 0, finishPts: 80, positionPts: 12, total: 92, support: 0, top8: 4, top12: 6, top16: 15 },
+      { rank: 10, teamLogo: '', teamName: 'Team Kappa', teamTag: 'KAPPA', matches: 15, wwcd: 0, finishPts: 75, positionPts: 10, total: 85, support: 0, top8: 3, top12: 5, top16: 15 },
+      { rank: 11, teamLogo: '', teamName: 'Team Lambda', teamTag: 'LAMBDA', matches: 15, wwcd: 0, finishPts: 70, positionPts: 8, total: 78, support: 0, top8: 2, top12: 4, top16: 15 },
+      { rank: 12, teamLogo: '', teamName: 'Team Mu', teamTag: 'MU', matches: 15, wwcd: 0, finishPts: 65, positionPts: 6, total: 71, support: 0, top8: 1, top12: 3, top16: 15 },
     ],
   }
 
   return (
-    <div ref={ref} className={`relative w-full h-full bg-gradient-to-br ${styles.bgPrimary} overflow-hidden`}>
+    <div ref={ref} className="relative w-full h-full bg-[#050508] overflow-hidden">
+      {/* Premium Geometric Background */}
+      <div className="absolute inset-0">
+        {/* Top-left gradient burst */}
+        <div className={`absolute top-0 left-0 w-[600px] h-[400px] bg-gradient-to-br ${styles.bgGradient} rounded-full blur-[100px]`} />
+        {/* Bottom-right accent */}
+        <div className={`absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-[${styles.secondary}]/20 via-transparent to-transparent rounded-full blur-[80px]`} />
+        {/* Geometric grid pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `linear-gradient(0deg, ${styles.primary} 1px, transparent 1px), linear-gradient(90deg, ${styles.primary} 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} />
+        {/* Diagonal light beam */}
+        <div className={`absolute top-0 right-0 w-[300px] h-full bg-gradient-to-b from-transparent via-[${styles.primary}]/5 to-transparent transform skew-x-12`} />
+        {/* Vignette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+      </div>
+
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col p-4">
-        {/* Header Section */}
-        <div className="mb-3">
-          {/* Logo */}
-          <div className="mb-2.5 flex items-center gap-2">
-            <img src="/favicon.svg" alt="Espotz" className="h-6 w-auto" />
-            <span className={`${isThumbnail ? 'text-xl' : 'text-2xl'} font-black ${styles.text} uppercase tracking-tight`}>ESPOTZ</span>
+      <div className="relative z-10 h-full flex flex-col">
+        {/* Hero Section */}
+        {isThumbnail ? (
+          <div className="relative px-4 pt-3 pb-2">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <div className={`absolute -inset-1 bg-gradient-to-r ${styles.accentGradient} rounded-lg blur-sm opacity-60`} />
+                  <img src="/favicon.svg" alt="Espotz" className="relative h-6 w-auto" />
+                </div>
+                <div className="text-sm font-black text-white uppercase tracking-tighter">ESPOTZ</div>
+              </div>
+            </div>
+            <div className="mb-2">
+              <h1 className="text-lg font-black text-white uppercase tracking-tighter leading-none mb-1">{mockData.tournamentName}</h1>
+              <div className="flex items-center gap-2">
+                <div className="text-[10px] font-semibold text-white/70 uppercase tracking-wider">{mockData.gameName}</div>
+                <div className="h-3 w-px bg-white/20" />
+                <div className={`text-[10px] font-black text-[${styles.accent}] uppercase tracking-wider`}>{mockData.stageName}</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className={`h-0.5 w-10 bg-gradient-to-r ${styles.accentGradient}`} />
+              <span className="text-[10px] font-bold text-white/60 uppercase tracking-wider">Overall Standings</span>
+            </div>
           </div>
+        ) : (
+          <div className="relative px-6 pt-6 pb-4">
+            {/* ESPOTZ Logo & Branding */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <div className={`absolute -inset-2 bg-gradient-to-r ${styles.accentGradient} rounded-xl blur-md opacity-60`} />
+                  <img src="/favicon.svg" alt="Espotz" className="relative h-10 w-auto" />
+                </div>
+                <div>
+                  <div className="text-xl font-black text-white uppercase tracking-tighter">ESPOTZ</div>
+                  <div className={`text-[10px] text-[${styles.accent}] uppercase tracking-[0.3em] font-semibold`}>Esports Platform</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+                <div className="text-right">
+                  <div className="text-[10px] text-white/40 uppercase tracking-wider">Official</div>
+                  <div className="text-[10px] text-white/40 uppercase tracking-wider">Standings</div>
+                </div>
+              </div>
+            </div>
 
-          {/* Tournament Name */}
-          <h1 className={`${isThumbnail ? 'text-xl' : 'text-3xl'} font-black ${styles.text} uppercase tracking-tight mb-1.5 leading-none`}>
-            {mockData.tournamentName}
-          </h1>
+            {/* Tournament Title */}
+            <div className="mb-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div className={`h-0.5 w-12 bg-gradient-to-r ${styles.accentGradient}`} />
+                <span className={`text-xs font-bold text-[${styles.accent}] uppercase tracking-[0.2em]`}>Tournament</span>
+              </div>
+              <h1 className="text-5xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-3">
+                {mockData.tournamentName}
+              </h1>
+              
+              {/* Stage & Game Info */}
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <div className={`absolute inset-0 bg-gradient-to-r ${styles.accentGradient} rounded-lg blur-lg opacity-40`} />
+                  <div className={`relative px-5 py-2 bg-gradient-to-r ${styles.accentGradient} rounded-lg border border-white/10`}>
+                    <span className="text-xs font-black text-white uppercase tracking-wider">{mockData.stageName}</span>
+                  </div>
+                </div>
+                <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg backdrop-blur-sm">
+                  <span className="text-xs font-semibold text-white/70 uppercase tracking-wider">{mockData.gameName}</span>
+                </div>
+              </div>
+            </div>
 
-          {/* Overall Standings Title */}
-          <h2 className={`${isThumbnail ? 'text-sm' : 'text-base'} font-bold ${styles.textSecondary} uppercase tracking-wider mb-1`}>
-            OVERALL STANDINGS
-          </h2>
-
-          {/* Subtitle */}
-          <div className="flex flex-col gap-0.5">
-            <h3 className={`${isThumbnail ? 'text-xs' : 'text-xs'} font-bold ${styles.text} uppercase tracking-wider`}>
-              {mockData.stageName}
-            </h3>
-            {!isThumbnail && (
-              <span className={`${styles.textSecondary} text-[10px] font-medium opacity-70`}>{mockData.gameName}</span>
-            )}
+            {/* Overall Standings Label */}
+            <div className="flex items-center gap-3">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              <div className="flex items-center gap-2">
+                <div className={`w-1.5 h-1.5 bg-[${styles.primary}] rounded-full`} />
+                <span className="text-xs font-bold text-white/60 uppercase tracking-widest">Overall Standings</span>
+                <div className={`w-1.5 h-1.5 bg-[${styles.primary}] rounded-full`} />
+              </div>
+              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-white/20 to-transparent" />
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Standings Panel */}
-        <div className="flex-1">
-          <div className={`bg-black/30 backdrop-blur-xl rounded-xl border ${styles.border} p-3 shadow-2xl`}>
+        {/* Standings Section */}
+        <div className={`flex-1 ${isThumbnail ? 'px-4 pb-2' : 'px-6 pb-4'}`}>
+          <div className="h-full bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
             <StandingsTable
               entries={mockData.entries}
               variant={variant}
@@ -160,17 +217,21 @@ export const OverallStandings = forwardRef<HTMLDivElement, OverallStandingsProps
 
         {/* Footer */}
         {!isThumbnail && (
-          <div className="mt-2.5 flex items-center justify-between">
-            <div className={`text-[10px] ${styles.text} opacity-50`}>
-              © 2024 Tournament Organizers
-            </div>
-            <div className={`text-[10px] ${styles.text} opacity-50`}>
-              Official Standings
+          <div className="px-6 pb-4">
+            <div className="flex items-center justify-between py-3 border-t border-white/10 bg-gradient-to-r from-white/[0.02] to-transparent rounded-b-2xl">
+              <div className="flex items-center gap-3">
+                <img src="/favicon.svg" alt="Espotz" className="h-4 w-auto opacity-60" />
+                <span className="text-[10px] text-white/50 uppercase tracking-wider font-black">ESPOTZ</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="text-[9px] text-white/40 uppercase tracking-wider">© 2024 Tournament Organizers</div>
+                <div className="h-3 w-px bg-white/10" />
+                <div className="text-[9px] text-white/40 uppercase tracking-wider">Official Standings</div>
+              </div>
             </div>
           </div>
         )}
       </div>
-
     </div>
   )
 })
