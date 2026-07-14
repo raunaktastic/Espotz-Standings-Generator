@@ -283,8 +283,6 @@ function StandingsGenerator() {
             onGameNameChange={setGameName}
             onVariantChange={setTemplateVariant}
             onFormatChange={setSelectedFormat}
-            onExport={handleExport}
-            onShare={handleShare}
           />
 
           {/* Preview Area */}

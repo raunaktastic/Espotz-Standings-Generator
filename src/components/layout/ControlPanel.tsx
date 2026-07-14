@@ -11,8 +11,6 @@ interface ControlPanelProps {
   onGameNameChange: (value: string) => void
   onVariantChange: (value: TemplateVariant) => void
   onFormatChange: (format: Format) => void
-  onExport: () => void
-  onShare: () => void
 }
 
 const variants: { id: TemplateVariant; label: string; color: string }[] = [
@@ -35,8 +33,6 @@ export function ControlPanel({
   onGameNameChange,
   onVariantChange,
   onFormatChange,
-  onExport,
-  onShare,
 }: ControlPanelProps) {
   return (
     <div className="w-full lg:w-[400px] h-full bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-4 md:p-6 shadow-2xl flex flex-col flex-shrink-0">
