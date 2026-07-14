@@ -35,7 +35,7 @@ export function ControlPanel({
   onFormatChange,
 }: ControlPanelProps) {
   return (
-    <div className="w-full lg:w-[400px] h-full bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-4 md:p-6 shadow-2xl flex flex-col flex-shrink-0">
+    <div className="w-full lg:w-[400px] h-full bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-4 md:p-6 shadow-2xl flex flex-col flex-shrink-0 overflow-y-auto">
       {/* Section 1: Tournament Info */}
       <div className="mb-4">
         <div className="flex items-center gap-3 mb-3">
