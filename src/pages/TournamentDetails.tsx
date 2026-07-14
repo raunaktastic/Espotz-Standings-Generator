@@ -1,10 +1,18 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { ArrowLeft, Trophy, Users, DollarSign, Calendar, MapPin, ChevronRight, Sparkles } from 'lucide-react'
 
 export function TournamentDetails() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [activeTab, setActiveTab] = useState('overview')
+
+  // Handle active tab from navigation state
+  useEffect(() => {
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab)
+    }
+  }, [location.state])
 
   const tabs = [
     { id: 'overview', label: 'Overview' },

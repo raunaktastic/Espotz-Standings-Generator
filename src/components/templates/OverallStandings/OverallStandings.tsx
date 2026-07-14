@@ -132,12 +132,7 @@ export const OverallStandings = forwardRef<HTMLDivElement, OverallStandingsProps
               </div>
             </div>
             <div className="mb-2">
-              <h1 className="text-lg font-black text-white uppercase tracking-tighter leading-none mb-1">{mockData.tournamentName}</h1>
-              <div className="flex items-center gap-2">
-                <div className="text-[10px] font-semibold text-white/70 uppercase tracking-wider">{mockData.gameName}</div>
-                <div className="h-3 w-px bg-white/20" />
-                <div className={`text-[10px] font-black text-[${styles.accent}] uppercase tracking-wider`}>{mockData.stageName}</div>
-              </div>
+              <h1 className="text-lg font-black text-white uppercase tracking-tighter leading-none">{mockData.tournamentName}</h1>
             </div>
             <div className="flex items-center gap-2">
               <div className={`h-0.5 w-10 bg-gradient-to-r ${styles.accentGradient}`} />
@@ -173,22 +168,9 @@ export const OverallStandings = forwardRef<HTMLDivElement, OverallStandingsProps
                 <div className={`h-0.5 w-12 bg-gradient-to-r ${styles.accentGradient}`} />
                 <span className={`text-xs font-bold text-[${styles.accent}] uppercase tracking-[0.2em]`}>Tournament</span>
               </div>
-              <h1 className="text-5xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-3">
+              <h1 className="text-5xl font-black text-white uppercase tracking-tighter leading-[0.9]">
                 {mockData.tournamentName}
               </h1>
-              
-              {/* Stage & Game Info */}
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <div className={`absolute inset-0 bg-gradient-to-r ${styles.accentGradient} rounded-lg blur-lg opacity-40`} />
-                  <div className={`relative px-5 py-2 bg-gradient-to-r ${styles.accentGradient} rounded-lg border border-white/10`}>
-                    <span className="text-xs font-black text-white uppercase tracking-wider">{mockData.stageName}</span>
-                  </div>
-                </div>
-                <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg backdrop-blur-sm">
-                  <span className="text-xs font-semibold text-white/70 uppercase tracking-wider">{mockData.gameName}</span>
-                </div>
-              </div>
             </div>
 
             {/* Overall Standings Label */}

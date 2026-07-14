@@ -26,10 +26,10 @@ export function Preview({ template, templateVariant, format, tournamentName, sta
   }
 
   return (
-    <div className="flex items-center justify-center h-full">
+    <div className="h-full">
       <div
         ref={onGraphicRef}
-        className={`${aspectRatio} w-full max-w-3xl sm:max-w-4xl md:max-w-5xl lg:max-w-7xl rounded-2xl shadow-2xl overflow-hidden relative`}
+        className={`${aspectRatio} w-full rounded-2xl shadow-2xl overflow-hidden relative`}
       >
         {renderTemplate()}
       </div>

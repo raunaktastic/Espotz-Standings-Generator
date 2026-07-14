@@ -68,14 +68,13 @@ export function StandingsTable({ entries, variant = 'pmgc', isThumbnail = false 
       <div className="h-full flex flex-col">
         {/* Header */}
         <div className={`px-2 py-1.5 bg-gradient-to-r ${styles.headerGradient} border-b border-white/10`}>
-          <div className="grid grid-cols-7 gap-1">
-            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">#</div>
-            <div className="col-span-2 text-[8px] font-black uppercase tracking-widest text-white/50">Team</div>
-            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">M</div>
-            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">W</div>
-            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">F</div>
-            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">P</div>
-            <div className="text-[8px] font-black uppercase tracking-widest text-white/50 text-center">Total</div>
+          <div className="grid grid-cols-6 gap-1 items-center">
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/60 text-center">Rank</div>
+            <div className="col-span-2 text-[8px] font-black uppercase tracking-widest text-white/60">Team Name</div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/60 text-center">WWCD</div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/60 text-center">Fin. Pts.</div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/60 text-center">Pos. Pts.</div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-white/60 text-center">Tot. Pts.</div>
           </div>
         </div>
 
@@ -91,7 +90,7 @@ export function StandingsTable({ entries, variant = 'pmgc', isThumbnail = false 
                 'hover:bg-white/[0.02]'
               }`}
             >
-              <div className="grid grid-cols-7 gap-1 items-center">
+              <div className="grid grid-cols-6 gap-1 items-center">
                 {/* Rank */}
                 <div className="flex items-center justify-center">
                   <div className={`w-5 h-5 flex items-center justify-center rounded-sm font-black text-[9px] ${
@@ -111,11 +110,10 @@ export function StandingsTable({ entries, variant = 'pmgc', isThumbnail = false 
                 </div>
 
                 {/* Stats */}
-                <div className="text-[9px] font-bold text-white/70 text-center leading-none">{entry.matches}</div>
                 <div className="text-[9px] font-bold text-white/70 text-center leading-none">{entry.wwcd}</div>
                 <div className="text-[9px] font-bold text-white/70 text-center leading-none">{entry.finishPts}</div>
                 <div className="text-[9px] font-bold text-white/70 text-center leading-none">{entry.positionPts}</div>
-                <div className="text-[9px] font-black text-white text-center leading-none">{entry.total}</div>
+                <div className="text-[9px] font-black text-white text-center leading-none"></div>
               </div>
             </div>
           ))}
@@ -128,11 +126,13 @@ export function StandingsTable({ entries, variant = 'pmgc', isThumbnail = false 
     <div className="h-full flex flex-col">
       {/* Header */}
       <div className={`px-4 py-2 bg-gradient-to-r ${styles.headerGradient} border-b border-white/10`}>
-        <div className="grid grid-cols-5 gap-2">
-          <div className="text-[9px] font-black uppercase tracking-widest text-white/50 text-center">#</div>
-          <div className="col-span-2 text-[9px] font-black uppercase tracking-widest text-white/50">Team</div>
-          <div className="text-[9px] font-black uppercase tracking-widest text-white/50 text-center">M</div>
-          <div className="text-[9px] font-black uppercase tracking-widest text-white/50 text-center">Total</div>
+        <div className="grid grid-cols-6 gap-2 items-center">
+          <div className="text-[10px] font-black uppercase tracking-widest text-white/60 text-center">Rank</div>
+          <div className="col-span-2 text-[10px] font-black uppercase tracking-widest text-white/60">Team Name</div>
+          <div className="text-[10px] font-black uppercase tracking-widest text-white/60 text-center">WWCD</div>
+          <div className="text-[10px] font-black uppercase tracking-widest text-white/60 text-center">Fin. Pts.</div>
+          <div className="text-[10px] font-black uppercase tracking-widest text-white/60 text-center">Pos. Pts.</div>
+          <div className="text-[10px] font-black uppercase tracking-widest text-white/60 text-center">Tot. Pts.</div>
         </div>
       </div>
 
@@ -148,7 +148,7 @@ export function StandingsTable({ entries, variant = 'pmgc', isThumbnail = false 
               'hover:bg-white/[0.02]'
             }`}
           >
-            <div className="grid grid-cols-5 gap-2 items-center">
+            <div className="grid grid-cols-6 gap-2 items-center">
               {/* Rank */}
               <div className="flex items-center justify-center">
                 <div className={`w-7 h-7 flex items-center justify-center rounded-lg font-black text-xs ${
@@ -168,8 +168,10 @@ export function StandingsTable({ entries, variant = 'pmgc', isThumbnail = false 
               </div>
 
               {/* Stats */}
-              <div className="text-[10px] font-bold text-white/70 text-center">{entry.matches}</div>
-              <div className="text-xs font-black text-white text-center">{entry.total}</div>
+              <div className="text-[10px] font-bold text-white/70 text-center">{entry.wwcd}</div>
+              <div className="text-[10px] font-bold text-white/70 text-center">{entry.finishPts}</div>
+              <div className="text-[10px] font-bold text-white/70 text-center">{entry.positionPts}</div>
+              <div className="text-xs font-black text-white text-center"></div>
             </div>
           </div>
         ))}
